@@ -7,8 +7,8 @@ import csv
 class City:
     def __init__(self, name, lat, lon):
         self.name = name
-        self.lat = lat
-        self.lon = lon
+        self.lat = float(lat)
+        self.lon = float(lon)
 
     def __str__(self):
         return f"City: {self.name}, Coordinates: {self.lat}, {self.lon}"
@@ -37,8 +37,9 @@ cities = []
 
 def cityreader(cities = []):
 	with open("cities.csv") as csvfile:
-		next(csvfile)
-		for row in csvfile:
+		reader = csv.reader(csvfile, delimiter=',')
+        next(reader)
+		    for row in reader:
 			cities.append(City(row[0], float(row[3]), float(row[4])))
 	return cities
 
